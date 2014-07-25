@@ -6,6 +6,7 @@ using namespace std;
 
 void bubbleSort(int[],int);
 void selectionSort(int [],int);
+void insertionSort(int [],int);
 void swap(int &,int &);
 
 int main()
@@ -17,8 +18,10 @@ int main()
 	for(int i=0;i<inNum;i++)
 		cin>>input[i];
 	
-	bubbleSort(input,inNum);
-	selectionSort(input,inNum);
+	//bubbleSort(input,inNum);
+	//selectionSort(input,inNum);
+	insertionSort(input,inNum);
+
 	for(int i=0;i<inNum;i++)
 		cout<<" "<<input[i];
 	cout<<endl;
@@ -55,6 +58,18 @@ void selectionSort(int inArr[],int num)
 	}
 }
 
+void insertionSort(int inArr[],int num)
+{
+	for(int i=0;i<num;i++)
+	{
+		for(int j=i;j>0;j--)
+		{
+			if(inArr[j] < inArr[j-1])
+				swap(inArr[j],inArr[j-1]);
+			else break;
+		}
+	}
+}
 void swap(int &a,int &b)
 {
 	int tmp = a;
