@@ -7,7 +7,9 @@ using namespace std;
 void bubbleSort(int[],int);
 void selectionSort(int [],int);
 void insertionSort(int [],int);
+void qSort(int [],int);
 void swap(int &,int &);
+
 
 int main()
 {
@@ -20,7 +22,8 @@ int main()
 	
 	//bubbleSort(input,inNum);
 	//selectionSort(input,inNum);
-	insertionSort(input,inNum);
+	//insertionSort(input,inNum);
+	qSort(input,inNum);
 
 	for(int i=0;i<inNum;i++)
 		cout<<" "<<input[i];
@@ -70,6 +73,39 @@ void insertionSort(int inArr[],int num)
 		}
 	}
 }
+
+void qSort (int inArr[],int num)
+{
+	int pivot =num/2,lNum=0,rNum = 0;
+	int left[MAX],right[MAX];
+	
+	if(num <=1 )
+		return;
+	for(int i=0;i<num;i++)
+	{
+		if(i!=pivot)
+		{
+			if(inArr[i]<= inArr[pivot])
+				left[lNum++] = inArr[i];
+			else 
+				right[rNum++] = inArr[i];
+		}
+	}
+
+	qSort(left,lNum);
+	qSort(right,rNum);
+
+	for(int i=0;i<num;i++)
+	{
+		if(i<lNum)
+			inArr[i] = left[i];
+		else if( i == lNum)
+			inArr[i] = inArr[pivot];
+		else
+			inArr[i] = right[i-lNum-1];
+	}
+}
+
 void swap(int &a,int &b)
 {
 	int tmp = a;
