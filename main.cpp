@@ -8,6 +8,7 @@ void bubbleSort(int[],int);
 void selectionSort(int [],int);
 void insertionSort(int [],int);
 void qSort(int [],int);
+void qSort_inplace(int [],int,int);
 void swap(int &,int &);
 
 
@@ -23,8 +24,9 @@ int main()
 	//bubbleSort(input,inNum);
 	//selectionSort(input,inNum);
 	//insertionSort(input,inNum);
-	qSort(input,inNum);
-
+	//qSort(input,inNum);
+	qSort_inplace(input,0,inNum-1);
+	
 	for(int i=0;i<inNum;i++)
 		cout<<" "<<input[i];
 	cout<<endl;
@@ -104,6 +106,29 @@ void qSort (int inArr[],int num)
 		else
 			inArr[i] = right[i-lNum-1];
 	}
+}
+
+void qSort_inplace(int inArr[],int left,int right)
+{
+	if(right<= left)
+		return;
+ 	int pivotIndex = (left+right)/2;
+	int pivot = inArr[pivotIndex];
+	int swapIndex = left;
+	swap(inArr[pivotIndex],inArr[right]);
+
+	for(int i=left;i<right;i++)
+	{
+		if(inArr[i] <= pivot )
+		{
+			swap(inArr[i],inArr[swapIndex]);
+			swapIndex++;
+		}
+	}
+
+	swap(inArr[swapIndex],inArr[right]);
+	qSort_inplace(inArr,left,pivotIndex-1);
+	qSort_inplace(inArr,pivotIndex+1,right);
 }
 
 void swap(int &a,int &b)
